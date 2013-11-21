@@ -3,10 +3,17 @@
 // Sample in-line data:
 var data = [4, 8, 15, 16, 23, 42];
 
+// Handy dimensions:
+var width = 420,
+    barHeight = 40,
+    text_offset = 3;
+
 // html-chart:
+
+// Set our range:
 var x = d3.scale.linear()
   .domain([0, d3.max(data)])
-  .range([0, 420]);
+  .range([0, width]);
 
 // Render the entire chart by adding div:
 d3.select(".html-chart")
@@ -17,15 +24,6 @@ d3.select(".html-chart")
     .text(function(d) { return d; });
 
 // svg-chart:
-
-var width = 420,
-    barHeight = 20,
-    text_offset = 3;
-
-// Set our range:
-var y = d3.scale.linear()
-    .domain([0, d3.max(data)])
-    .range([0, width]);
 
 // Get a new chart:
 var chart = d3.select(".svg-chart")
@@ -38,11 +36,11 @@ var bar = chart.selectAll("g")
     .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
 bar.append("rect")
-    .attr("width", y)
+    .attr("width", x)
     .attr("height", barHeight - 1);
 
 bar.append("text")
-    .attr("x", function(d) { return y(d) - text_offset; })
+    .attr("x", function(d) { return x(d) - text_offset; })
     .attr("y", barHeight / 2)
     .attr("dy", ".35em")
     .text(function(d) { return d; });
@@ -50,28 +48,28 @@ bar.append("text")
 // tsv-chart:
 
 // Set our range:
-var z = d3.scale.linear()
+x = d3.scale.linear()
     .range([0, width]);
 
-var chart = d3.select(".tsv-chart")
+chart = d3.select(".tsv-chart")
     .attr("width", width);
 
 d3.tsv("bar-chart.dat", type, function(error, data) {
-  z.domain([0, d3.max(data, function(d) { return d.value; })]);
+  x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);
 
-  var bar = chart.selectAll("g")
+  bar = chart.selectAll("g")
       .data(data)
     .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
   bar.append("rect")
-      .attr("width", function(d) { return z(d.value); })
+      .attr("width", function(d) { return x(d.value); })
       .attr("height", barHeight - 1);
 
   bar.append("text")
-      .attr("x", function(d) { return z(d.value) - text_offset; })
+      .attr("x", function(d) { return x(d.value) - text_offset; })
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });

@@ -4,7 +4,7 @@
 var data = [4, 8, 15, 16, 23, 42];
 
 // Handy dimensions:
-var width = 420,
+var width = data[5] * 10,
     barHeight = 40,
     text_offset = 3;
 

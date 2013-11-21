@@ -11,7 +11,7 @@ var width = 420,
 // html-chart:
 
 // Set our range:
-var x = d3.scale.linear()
+var range = d3.scale.linear()
   .domain([0, d3.max(data)])
   .range([0, width]);
 
@@ -20,7 +20,7 @@ d3.select(".html-chart")
   .selectAll("div")
     .data(data)
   .enter().append("div")
-    .style("width", function(d) { return x(d) + "px"; })
+    .style("width", function(d) { return range(d) + "px"; })
     .text(function(d) { return d; });
 
 // svg-chart:
@@ -38,12 +38,12 @@ var bar = chart.selectAll("g")
 
 // Add a bar:
 bar.append("rect")
-    .attr("width", x)
+    .attr("width", range)
     .attr("height", barHeight - 1);
 
 // Add the bar label:
 bar.append("text")
-    .attr("x", function(d) { return x(d) - text_offset; })
+    .attr("x", function(d) { return range(d) - text_offset; })
     .attr("y", barHeight / 2)
     .attr("dy", ".35em")
     .text(function(d) { return d; });
@@ -51,7 +51,7 @@ bar.append("text")
 // tsv-chart:
 
 // Reset the range:
-x = d3.scale.linear()
+range = d3.scale.linear()
     .range([0, width]);
 
 // Reset the text offset:
@@ -65,7 +65,7 @@ chart = d3.select(".tsv-chart")
 d3.tsv("bar-chart.dat", type, function(error, data) {
 
     // Set the domain inside a callback:
-    x.domain([0, d3.max(data, function(d) { return d.value; })]);
+    range.domain([0, d3.max(data, function(d) { return d.value; })]);
 
     // Set the height dimension:
     chart.attr("height", barHeight * data.length);
@@ -78,12 +78,12 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
 
     // Add a bar:
     bar.append("rect")
-        .attr("width", function(d) { return x(d.value); })
+        .attr("width", function(d) { return range(d.value); })
         .attr("height", barHeight - 1);
 
     // Add the bar label:
     bar.append("text")
-        .attr("x", function(d) { return x(d.value) - text_offset; })
+        .attr("x", function(d) { return range(d.value) - text_offset; })
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
         .text(function(d) { return d.value; });

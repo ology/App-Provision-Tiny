@@ -1,3 +1,5 @@
+// Self study from http://bost.ocks.org/mike/bar/2/
+
 var data = [4, 8, 15, 16, 23, 42];
 
 // html-chart:
@@ -46,7 +48,7 @@ var y = d3.scale.linear()
 var chart = d3.select(".tsv-chart")
     .attr("width", width);
 
-d3.tsv("data.tsv", type, function(error, data) {
+d3.tsv("bar-chart.dat", type, function(error, data) {
   x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);

@@ -1,5 +1,6 @@
 // Self study from http://bost.ocks.org/mike/bar/2/
 
+// Sample in-line data:
 var data = [4, 8, 15, 16, 23, 42];
 
 // html-chart:
@@ -7,6 +8,7 @@ var x = d3.scale.linear()
   .domain([0, d3.max(data)])
   .range([0, 420]);
 
+// Render the entire chart by adding div:
 d3.select(".html-chart")
   .selectAll("div")
     .data(data)
@@ -15,14 +17,17 @@ d3.select(".html-chart")
     .text(function(d) { return d; });
 
 // svg-chart:
+
 var width = 420,
     barHeight = 20,
     text_offset = 3;
 
+// Set our range:
 var y = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([0, width]);
 
+// Get a new chart:
 var chart = d3.select(".svg-chart")
     .attr("width", width)
     .attr("height", barHeight * data.length);
@@ -43,6 +48,8 @@ bar.append("text")
     .text(function(d) { return d; });
 
 // tsv-chart:
+
+// Set our range:
 var z = d3.scale.linear()
     .range([0, width]);
 

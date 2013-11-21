@@ -16,9 +16,10 @@ d3.select(".html-chart")
 
 // svg-chart:
 var width = 420,
-    barHeight = 20;
+    barHeight = 20,
+    text_offset = 3;
 
-var x = d3.scale.linear()
+var y = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([0, width]);
 
@@ -32,24 +33,24 @@ var bar = chart.selectAll("g")
     .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
 bar.append("rect")
-    .attr("width", x)
+    .attr("width", y)
     .attr("height", barHeight - 1);
 
 bar.append("text")
-    .attr("x", function(d) { return x(d) - 3; })
+    .attr("x", function(d) { return y(d) - text_offset; })
     .attr("y", barHeight / 2)
     .attr("dy", ".35em")
     .text(function(d) { return d; });
 
 // tsv-chart:
-var y = d3.scale.linear()
+var z = d3.scale.linear()
     .range([0, width]);
 
 var chart = d3.select(".tsv-chart")
     .attr("width", width);
 
 d3.tsv("bar-chart.dat", type, function(error, data) {
-  x.domain([0, d3.max(data, function(d) { return d.value; })]);
+  z.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);
 
@@ -59,16 +60,17 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
   bar.append("rect")
-      .attr("width", function(d) { return x(d.value); })
+      .attr("width", function(d) { return z(d.value); })
       .attr("height", barHeight - 1);
 
   bar.append("text")
-      .attr("x", function(d) { return x(d.value) - 3; })
+      .attr("x", function(d) { return z(d.value) - text_offset; })
       .attr("y", barHeight / 2)
       .attr("dy", ".35em")
       .text(function(d) { return d.value; });
 });
 
+// Set the domain inside a callback.
 function type(d) {
   d.value = +d.value; // coerce to number
   return d;

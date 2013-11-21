@@ -30,15 +30,18 @@ var chart = d3.select(".svg-chart")
     .attr("width", width)
     .attr("height", barHeight * data.length);
 
+// Add translation to the SVG g transform:
 var bar = chart.selectAll("g")
     .data(data)
   .enter().append("g")
     .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
+// Add a bar:
 bar.append("rect")
     .attr("width", x)
     .attr("height", barHeight - 1);
 
+// Add the bar label:
 bar.append("text")
     .attr("x", function(d) { return x(d) - text_offset; })
     .attr("y", barHeight / 2)
@@ -51,23 +54,31 @@ bar.append("text")
 x = d3.scale.linear()
     .range([0, width]);
 
+// Get a new chart:
 chart = d3.select(".tsv-chart")
     .attr("width", width);
 
+// Import the data:
 d3.tsv("bar-chart.dat", type, function(error, data) {
+
+  // Set the domain inside a callback:
   x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
+  // Set the height dimension:
   chart.attr("height", barHeight * data.length);
 
+  // Add translation to the SVG g transform:
   bar = chart.selectAll("g")
       .data(data)
     .enter().append("g")
       .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
+  // Add a bar:
   bar.append("rect")
       .attr("width", function(d) { return x(d.value); })
       .attr("height", barHeight - 1);
 
+  // Add the bar label:
   bar.append("text")
       .attr("x", function(d) { return x(d.value) - text_offset; })
       .attr("y", barHeight / 2)
@@ -75,7 +86,7 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
       .text(function(d) { return d.value; });
 });
 
-// Set the domain inside a callback.
+// Set the domain inside this callback.
 function type(d) {
   d.value = +d.value; // coerce to number
   return d;

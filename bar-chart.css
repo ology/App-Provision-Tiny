@@ -25,19 +25,13 @@
   text-anchor: end;
 }
 
-.horiz-chart rect {
-  fill: steelblue;
-}
-.horiz-chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: middle;
-}
-
+// .horiz-chart
 .bar {
   fill: steelblue;
 }
-
+.bar:hover {
+  fill: brown;
+}
 .axis text {
   font: 10px sans-serif;
 }

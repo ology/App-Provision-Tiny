@@ -8,33 +8,33 @@ function type(d) {
   return d;
 }
 
-// Reset our dimensions
+// Set our dimensions
 var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width      = 960 - margin.left - margin.right,
-    barHeight  = 500 - margin.top - margin.bottom;
+    width  = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 // Set the range bands
 var bands = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
-// Reset the range
+// Set the range
 range = d3.scale.linear()
-    .range([barHeight, 0]);
+    .range([height, 0]);
 
+// Get axes
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
 
-// Reset the chart object
-chart = d3.select(".horiz-chart")
+// Set the chart object
+var chart = d3.select(".horiz-chart")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", barHeight + margin.top + margin.bottom);
-
-// Add the axis to the chart
-chart.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Load external data
 d3.tsv("bar-chart.dat", type, function(error, data) {
@@ -43,16 +43,16 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
   bands.domain(data.map(function(d) { return d.name; }));
   range.domain([0, d3.max(data, function(d) { return d.value; })]);
 
-  // Add a 2nd axis
+  // Add the axis to the chart
   chart.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + barHeight + ")")
+      .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
   chart.append("g")
       .attr("class", "y axis")
       .call(yAxis);
 
-  // Reset the bar object
+  // Set the bar object
   chart.selectAll(".bar")
       .data(data)
     .enter().append("rect")

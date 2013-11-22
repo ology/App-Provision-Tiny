@@ -24,7 +24,7 @@ var yAxis = d3.svg.axis()
     .ticks(10, "%");
 
 // Set the chart object
-var svg = d3.select("body").append("svg")
+var chart = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -38,11 +38,11 @@ d3.tsv("bar-chart-III.dat", type, function(error, data) {
   range.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
   // Add the axis to the chart
-  svg.append("g")
+  chart.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
-  svg.append("g")
+  chart.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
@@ -53,7 +53,7 @@ d3.tsv("bar-chart-III.dat", type, function(error, data) {
       .text("Frequency");
 
   // Set the bar object
-  svg.selectAll(".bar")
+  chart.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")

@@ -9,7 +9,7 @@ var data = [32, 57, 112],
     x = d3.scale.ordinal().domain([57, 32, 112]).rangePoints([0, w], 1),
     y = d3.scale.ordinal().domain(data).rangePoints([0, h], 2);
 
-var svg = d3.select("#chart-13").append("svg")
+var svg = d3.select("#chart").append("svg")
   .attr("width", w)
   .attr("height", h);
 
@@ -62,7 +62,7 @@ xe.select("circle")
   .style("fill", "lightcoral")
   .style("stroke", "red");
 
-d3.select("#chart-13 button").on("click", function() {
+d3.select("#chart button").on("click", function() {
 gd
     .attr("transform", function(d, i) { return "translate(" + 20 * (i + 1) +
 ",20)"; })

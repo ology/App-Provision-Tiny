@@ -9,7 +9,7 @@ function type(d) {
 }
 
 // Set our dimensions
-var margin = {top: 20, right: 30, bottom: 30, left: 40},
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width  = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -18,7 +18,7 @@ var bands = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
 // Set the range
-range = d3.scale.linear()
+var range = d3.scale.linear()
     .range([height, 0]);
 
 // Get axes
@@ -27,7 +27,8 @@ var xAxis = d3.svg.axis()
     .orient("bottom");
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient("left")
+    .ticks(10, "%");
 
 // Set the chart object
 var chart = d3.select(".horiz-chart")
@@ -50,7 +51,13 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
       .call(xAxis);
   chart.append("g")
       .attr("class", "y axis")
-      .call(yAxis);
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
 
   // Set the bar object
   chart.selectAll(".bar")

@@ -1,12 +1,6 @@
-// Self study from http://bost.ocks.org/mike/bar/2/
+// Self study from http://bost.ocks.org/mike/bar/3/
 
 // Horizontal bar chart
-
-// Set the domain inside this callback.
-function type(d) {
-  d.value = +d.value; // coerce to number
-  return d;
-}
 
 // Set our dimensions
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -38,11 +32,11 @@ var chart = d3.select(".horiz-chart")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Load external data
-d3.tsv("bar-chart.dat", type, function(error, data) {
+d3.tsv("bar-chart-III.dat", type, function(error, data) {
 
   // Set the domains, now that we have data
-  bands.domain(data.map(function(d) { return d.name; }));
-  range.domain([0, d3.max(data, function(d) { return d.value; })]);
+  bands.domain(data.map(function(d) { return d.letter; }));
+  range.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
   // Add the axis to the chart
   chart.append("g")
@@ -64,9 +58,16 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return bands(d.name); })
+      .attr("x", function(d) { return bands(d.letter); })
       .attr("width", bands.rangeBand())
-      .attr("y", function(d) { return range(d.value); })
-      .attr("height", function(d) { return height - range(d.value); });
+      .attr("y", function(d) { return range(d.frequency); })
+      .attr("height", function(d) { return height - range(d.frequency); });
 
 });
+
+// Set the domain inside this callback.
+function type(d) {
+  d.frequency = +d.frequency; // coerce to number
+  return d;
+}
+

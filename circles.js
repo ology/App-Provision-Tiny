@@ -1,6 +1,14 @@
 // Self study from 
 // Circles and data
 
+var data = [32, 57, 112],
+    dataEnter = data.concat(293),
+    dataExit = data.slice(0, 2),
+    w = 360,
+    h = 180,
+    x = d3.scale.ordinal().domain([57, 32, 112]).rangePoints([0, w], 1),
+    y = d3.scale.ordinal().domain(data).rangePoints([0, h], 2);
+
 var svg = d3.select("#chart-13").append("svg")
   .attr("width", w)
   .attr("height", h);
@@ -9,11 +17,10 @@ var gd = svg.selectAll(".data")
   .data([32, 57, 293])
 .enter().append("g")
   .attr("class", "data")
-  .attr("transform", function(d, i) { return "translate(" + 20 * (i + 1) +
-",20)"; });
+  .attr("transform", function(d, i) { return "translate(" + 20 * (i + 1) + ",20)"; });
 
 var ed = gd.filter(function(d, i) { return i == 2; }),
-  ud = gd.filter(function(d, i) { return i != 2; });
+    ud = gd.filter(function(d, i) { return i != 2; });
 
 ed.append("circle")
   .attr("class", "little")

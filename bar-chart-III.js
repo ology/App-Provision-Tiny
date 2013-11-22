@@ -64,9 +64,9 @@ d3.tsv("bar-chart.dat", type, function(error, data) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.name); })
-      .attr("y", function(d) { return y(d.value); })
-      .attr("height", function(d) { return height - y(d.value); })
-      .attr("width", x.rangeBand());
+      .attr("x", function(d) { return bands(d.name); })
+      .attr("width", bands.rangeBand())
+      .attr("y", function(d) { return range(d.value); })
+      .attr("height", function(d) { return height - range(d.value); });
 
 });

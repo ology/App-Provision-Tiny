@@ -98,7 +98,7 @@ d3.select("#chart button").on("click", function() {
     .duration(750)
     .attr("r", Math.sqrt);
 
-  // Exit cicle
+  // Exit circle
   xe.select("circle")
     .attr("r", Math.sqrt)
   .transition()

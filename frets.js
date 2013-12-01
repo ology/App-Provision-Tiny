@@ -5,7 +5,13 @@ var width   = 300,
 
 // Get our data.
 var strings = [
-[1,1.5], [2,2.5], [3,3.5], [4,4.5], [5,5.5], [6,6] ];
+    [1, 1.5],
+    [2, 2.5],
+    [3, 3.5],
+    [4, 4.5],
+    [5, 5.5],
+    [6, 6.5]
+];
 
 // Create scale functions.
 var xScale = d3.scale.linear()
@@ -27,6 +33,12 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .ticks(6);
 
+// Create SVG element.
+var svg = d3.select("body")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
 // Additional axes
 function make_x_axis() {        
     return d3.svg.axis()
@@ -41,11 +53,31 @@ function make_y_axis() {
         .ticks(6)
 }
 
-// Create SVG element.
-var svg = d3.select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+// Add the edge axes to the canvas.
+svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + (height - padding) + ")")
+    .call(xAxis);
+svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + padding + ",0)")
+    .call(yAxis);
+
+// Add the tick axes to the canvas.
+svg.append("g")         
+    .attr("class", "grid")
+    .attr("transform", "translate(0," + (height - padding) + ")")
+    .call(make_x_axis()
+        .tickSize(2 * padding - height, 0, 0)
+        .tickFormat("")
+    );
+svg.append("g")         
+    .attr("class", "grid")
+    .attr("transform", "translate(" + padding + ",0)")
+    .call(make_y_axis()
+        .tickSize(3 * padding - width, 0, 0)
+        .tickFormat("")
+    );
 
 // Create circles.
 svg.selectAll("circle")
@@ -68,31 +100,4 @@ svg.selectAll("text")
     .attr("font-size", "11px")
     .attr("fill", "red");
 */
-
-// Add the X axis to the canvas.
-svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(0," + (height - padding) + ")")
-    .call(xAxis);
-
-// Create Y axis.
-svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(" + padding + ",0)")
-    .call(yAxis);
-
-// Add the tick axes to the canvas.
-svg.append("g")         
-    .attr("class", "grid")
-    .attr("transform", "translate(0," + (height - padding) + ")")
-    .call(make_x_axis()
-        .tickSize(-height, 0, 0)
-        .tickFormat("")
-    );
-svg.append("g")         
-    .attr("class", "grid")
-    .call(make_y_axis()
-        .tickSize(-width, 0, 0)
-        .tickFormat("")
-    );
 

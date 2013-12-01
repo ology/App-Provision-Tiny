@@ -88,16 +88,3 @@ svg.selectAll("circle")
     .attr("cy", function(d) { return yScale(d[1]); })
     .attr("r", dot);
 
-/* Create labels.
-svg.selectAll("text")
-    .data(strings)
-  .enter()
-    .append("text")
-    .text(function(d) { return d[0] + "," + d[1]; })
-    .attr("x", function(d) { return xScale(d[0]); })
-    .attr("y", function(d) { return yScale(d[1]); })
-    .attr("font-family", "sans-serif")
-    .attr("font-size", "11px")
-    .attr("fill", "red");
-*/
-

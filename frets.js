@@ -7,12 +7,12 @@ var width   = 300,
 
 // Get our data.
 var strings = [
-    [1, 1.5],
-    [2, 2.5],
-    [3, 3.5],
-    [4, 4.5],
-    [5, 5.5],
-    [6, 6.5]
+    [1, 0.5],
+    [2, 1.5],
+    [3, 2.5],
+    [4, 3.5],
+    [5, 4.5],
+    [6, 5.5]
 ];
 
 // Create scale functions.
@@ -20,7 +20,7 @@ var xScale = d3.scale.linear()
     .domain([1, d3.max(strings, function(d) { return d[0]; })])
     .range([padding, width - padding * 2]);
 var yScale = d3.scale.linear()
-    .domain([1, d3.max(strings, function(d) { return d[1]; })])
+    .domain([d3.max(strings, function(d) { return d[1]; }) + 1, 0])
     .range([height - padding, padding]);
 
 // Define the axes.

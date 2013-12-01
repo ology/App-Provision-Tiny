@@ -1,7 +1,8 @@
 // Set the parameters.
 var width   = 300,
     height  = 300,
-    ticknum = 6,
+    xTicks  = 6,
+    yTicks  = 4,
     dot     = 8,
     padding = 50;
 
@@ -11,8 +12,8 @@ var strings = [
     [2, 1.5],
     [3, 2.5],
     [4, 3.5],
-    [5, 4.5],
-    [6, 5.5]
+    [5, 0],
+    [6, 0]
 ];
 
 // Create scale functions.
@@ -20,18 +21,19 @@ var xScale = d3.scale.linear()
     .domain([1, d3.max(strings, function(d) { return d[0]; })])
     .range([padding, width - padding * 2]);
 var yScale = d3.scale.linear()
-    .domain([d3.max(strings, function(d) { return d[1]; }) + 1, 0])
+//     .domain([d3.max(strings, function(d) { return d[1]; }) + 1, 0])
+    .domain([yTicks, 0])
     .range([height - padding, padding]);
 
 // Define the axes.
 var xAxis = d3.svg.axis()
     .scale(xScale)
     .orient("top")
-    .ticks(ticknum);
+    .ticks(xTicks);
 var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient("left")
-    .ticks(ticknum);
+    .ticks(yTicks);
 
 // Create SVG canvas element.
 var svg = d3.select("body")
@@ -44,13 +46,13 @@ function make_x_axis() {
     return d3.svg.axis()
         .scale(xScale)
          .orient("bottom")
-         .ticks(ticknum)
+         .ticks(xTicks)
 }
 function make_y_axis() {        
     return d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(ticknum)
+        .ticks(yTicks)
 }
 
 // Add the edge axes to the canvas.

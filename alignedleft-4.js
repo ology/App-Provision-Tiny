@@ -52,7 +52,7 @@ svg.selectAll("circle")
     .attr("cy", function(d) { return yScale(d[1]); })
     .attr("r", function(d) { return rScale(d[1]); });
 
-// Create labels.
+/* Create labels.
 svg.selectAll("text")
     .data(dataset)
   .enter()
@@ -63,6 +63,7 @@ svg.selectAll("text")
     .attr("font-family", "sans-serif")
     .attr("font-size", "11px")
     .attr("fill", "red");
+*/
 
 // Add the X axis to the canvas.
 svg.append("g")

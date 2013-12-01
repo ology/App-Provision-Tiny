@@ -1,6 +1,8 @@
 // Set the parameters.
 var width   = 300,
     height  = 300,
+    ticknum = 6,
+    dot     = 8,
     padding = 50;
 
 // Get our data.
@@ -21,19 +23,17 @@ var yScale = d3.scale.linear()
     .domain([1, d3.max(strings, function(d) { return d[1]; })])
     .range([height - padding, padding]);
 
-// Define the X axis.
+// Define the axes.
 var xAxis = d3.svg.axis()
     .scale(xScale)
-    .orient("bottom")
-    .ticks(6);
-
-// Define the Y axis.
+    .orient("top")
+    .ticks(ticknum);
 var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient("left")
-    .ticks(6);
+    .ticks(ticknum);
 
-// Create SVG element.
+// Create SVG canvas element.
 var svg = d3.select("body")
     .append("svg")
     .attr("width", width)
@@ -44,19 +44,19 @@ function make_x_axis() {
     return d3.svg.axis()
         .scale(xScale)
          .orient("bottom")
-         .ticks(6)
+         .ticks(ticknum)
 }
 function make_y_axis() {        
     return d3.svg.axis()
         .scale(yScale)
         .orient("left")
-        .ticks(6)
+        .ticks(ticknum)
 }
 
 // Add the edge axes to the canvas.
 svg.append("g")
     .attr("class", "axis")
-    .attr("transform", "translate(0," + (height - padding) + ")")
+    .attr("transform", "translate(0," + padding + ")")
     .call(xAxis);
 svg.append("g")
     .attr("class", "axis")
@@ -79,14 +79,14 @@ svg.append("g")
         .tickFormat("")
     );
 
-// Create circles.
+// Create finger placement circles.
 svg.selectAll("circle")
     .data(strings)
   .enter()
     .append("circle")
     .attr("cx", function(d) { return xScale(d[0]); })
     .attr("cy", function(d) { return yScale(d[1]); })
-    .attr("r", 10);
+    .attr("r", dot);
 
 /* Create labels.
 svg.selectAll("text")

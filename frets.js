@@ -21,7 +21,6 @@ var xScale = d3.scale.linear()
     .domain([1, d3.max(strings, function(d) { return d[0]; })])
     .range([padding, width - padding * 2]);
 var yScale = d3.scale.linear()
-//     .domain([d3.max(strings, function(d) { return d[1]; }) + 1, 0])
     .domain([yTicks, 0])
     .range([height - padding, padding]);
 

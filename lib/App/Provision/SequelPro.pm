@@ -1,7 +1,7 @@
-package App::Provisioner::SequelPro;
+package App::Provision::SequelPro;
 use strict;
 use warnings;
-use parent qw( App::Provisioner );
+use parent qw( App::Provision );
 
 sub condition
 {

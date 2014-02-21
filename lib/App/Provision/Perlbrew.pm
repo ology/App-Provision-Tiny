@@ -1,7 +1,7 @@
-package App::Provisioner::Perlbrew;
+package App::Provision::Perlbrew;
 use strict;
 use warnings;
-use parent qw( App::Provisioner );
+use parent qw( App::Provision );
 
 sub perlbrew {
     my $self = shift;

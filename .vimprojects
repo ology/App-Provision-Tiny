@@ -1,0 +1,15 @@
+App-Provision-Tiny=~/sandbox/github/ology/App-Provision-Tiny CD=. {
+ lib=lib/App/Provision {
+  Perlbrew.pm
+  SequelPro.pm
+  Tiny.pm
+ }
+ t=t {
+  00-load.t
+  01-methods.t
+ }
+ bin=bin {
+ }
+ Changes
+ dist.ini
+}

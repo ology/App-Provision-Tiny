@@ -1,6 +1,8 @@
 App-Provision-Tiny=~/sandbox/github/ology/App-Provision-Tiny CD=. {
  lib=lib/App/Provision {
+  Chameleon5.pm
   CpanUpdate.pm
+  Foundation.pm
   Git.pm
   Homebrew.pm
   Mysql.pm
@@ -15,7 +17,7 @@ App-Provision-Tiny=~/sandbox/github/ology/App-Provision-Tiny CD=. {
   01-methods.t
  }
  bin=bin {
-  devel-workstation.pl
+  provis
  }
  Changes
  dist.ini

@@ -1,4 +1,4 @@
-package App::Provision::RepoUpdate;
+package App::Provision::Repoupdate;
 use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );

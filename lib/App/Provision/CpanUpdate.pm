@@ -1,4 +1,4 @@
-package App::Provision::CpanUpdate;
+package App::Provision::Cpanupdate;
 use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );

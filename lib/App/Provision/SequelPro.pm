@@ -1,4 +1,4 @@
-package App::Provision::SequelPro;
+package App::Provision::Sequelpro;
 use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );

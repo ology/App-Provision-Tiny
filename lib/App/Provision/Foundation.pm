@@ -7,13 +7,11 @@ sub condition
 {
     my $self = shift;
 
-    $self->{program} = 'foundation';
-
     die "Program '$self->{program}' must include a --repo and --site\n"
         unless $self->{repo} && $self->{site};
 
     my $condition = -e "$self->{site}/js/foundation.min.js";
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
 
     return $condition ? 1 : 0;
 }

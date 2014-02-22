@@ -7,8 +7,6 @@ sub condition
 {
     my $self = shift;
 
-    $self->{program} = 'ssh';
-
     die "Program '$self->{program}' must include --keytype and --keyname\n"
         unless $self->{keytype} && $self->{keyname};
 
@@ -17,7 +15,7 @@ sub condition
         $self->{keytype}, $self->{keyname};
 
     my $condition = -e $self->{keyfile};
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
 
     return $condition ? 1 : 0;
 }

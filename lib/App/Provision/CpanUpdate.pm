@@ -7,8 +7,6 @@ sub condition
 {
     my $self = shift;
 
-    $self->{program} = 'cpanupdate';
-
     die "Program '$self->{program}' must include a --repo\n"
         unless $self->{repo};
 

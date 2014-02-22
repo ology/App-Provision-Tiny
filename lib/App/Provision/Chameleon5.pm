@@ -7,13 +7,11 @@ sub condition
 {
     my $self = shift;
 
-    $self->{program} = 'chameleon5';
-
     die "Program '$self->{program}' must include a --repo ~/repos\n"
         unless $self->{repo};
 
     my $condition = -d "$self->{repo}/chameleon5";
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
 
     return $condition ? 1 : 0;
 }

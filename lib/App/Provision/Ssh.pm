@@ -21,7 +21,8 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub ssh {
+sub ssh
+{
     my $self = shift;
     $self->recipe(
       [ 'ssh-keygen', '-t', $self->{keytype}, '-f', $self->{keyfile} ],

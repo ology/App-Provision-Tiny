@@ -7,9 +7,10 @@ sub condition
 {
     my $self = shift;
 
-    die "Program 'ssh' must include --keytype and --keyname\n"
-        if $self->{program} eq 'ssh'
-            && !($self->{keytype} && $self->{keyname});
+    $self->{program} = 'ssh';
+
+    die "Program '$self->{program}' must include --keytype and --keyname\n"
+        unless $self->{keytype} && $self->{keyname};
 
     # Set the keyfile attribute.
     $self->{keyfile} = sprintf '%s/.ssh/id_%s-%s', $ENV{HOME},

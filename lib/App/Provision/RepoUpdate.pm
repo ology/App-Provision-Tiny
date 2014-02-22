@@ -6,10 +6,15 @@ use parent qw( App::Provision::Tiny );
 sub condition
 {
     my $self = shift;
-    die "Program 'repoupdate' must include a --repo\n"
-        if $self->{program} eq 'repoupdate' && !$self->{repo};
+
+    $self->{program} = 'repoupdate';
+
+    die "Program '$self->{program}' must include a --repo\n"
+        unless $self->{repo};
+
     my $condition = 0;
     warn "Always update!\n";
+
     return $condition;
 }
 

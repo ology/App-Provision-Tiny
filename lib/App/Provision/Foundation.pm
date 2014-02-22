@@ -7,7 +7,9 @@ sub condition
 {
     my $self = shift;
 
-    die "Program 'foundation' must include a --repo and --site\n"
+    $self->{program} = 'foundation';
+
+    die "Program '$self->{program}' must include a --repo and --site\n"
         unless $self->{repo} && $self->{site};
 
     my $condition = -e "$self->{site}/js/foundation.min.js";
@@ -16,7 +18,8 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub foundation {
+sub foundation
+{
     my $self = shift;
     $self->recipe(
       [ 'wget', 'http://foundation.zurb.com/cdn/releases/foundation-5.1.1.zip', '-P', "$ENV{HOME}/Downloads/" ],

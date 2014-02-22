@@ -7,7 +7,9 @@ sub condition
 {
     my $self = shift;
 
-    die "Program 'chameleon5' must include a --repo ~/repos\n"
+    $self->{program} = 'chameleon5';
+
+    die "Program '$self->{program}' must include a --repo ~/repos\n"
         unless $self->{repo};
 
     my $condition = -d "$self->{repo}/chameleon5";

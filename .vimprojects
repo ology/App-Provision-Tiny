@@ -9,6 +9,7 @@ App-Provision-Tiny=~/sandbox/github/ology/App-Provision-Tiny CD=. {
   01-methods.t
  }
  bin=bin {
+  devel-workstation.pl
  }
  Changes
  dist.ini

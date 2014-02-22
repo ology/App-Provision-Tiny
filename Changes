@@ -1,5 +1,5 @@
 Revision history for App-Provision-Tiny
 
-
-    -
+{{$NEXT}}
+    - Imported functionality from devel repo.
     - Minted by Dist::Zilla

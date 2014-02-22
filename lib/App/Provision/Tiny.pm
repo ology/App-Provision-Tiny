@@ -49,13 +49,23 @@ sub new
 {
     my $class = shift;
     my %args = @_;
-    my $self = {
-        program => $args{program} || undef,
-        system  => $args{system} || 'osx',
-        %args # Final override.
-    };
+    my $self = {};
     bless $self, $class;
+    $self->_init(%args);
     return $self;
+}
+
+sub _init
+{
+    my $self = shift;
+    my %args = @_;
+    # Make arguments object attributes.
+    for my $arg ( keys %args )
+    {
+        $self->{$arg} = $args{$arg} || undef;
+    }
+    # Set defaults.
+    $self->{system} ||= 'osx';
 }
 
 =head2 condition()

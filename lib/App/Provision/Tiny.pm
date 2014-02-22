@@ -59,11 +59,10 @@ sub _init
 {
     my $self = shift;
     my %args = @_;
-    # Make arguments object attributes.
-    for my $arg ( keys %args )
-    {
-        $self->{$arg} = $args{$arg} || undef;
-    }
+
+    # Turn arguments into object attributes.
+    $self->{$_} = $args{$_} || undef for keys %args;
+
     # Set defaults.
     $self->{system} ||= 'osx';
 }

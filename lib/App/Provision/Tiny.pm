@@ -121,4 +121,16 @@ sub system_install
     }
 }
 
+=head2 meet()
+
+This is a subroutine to redefine in your class for the actual execution, that is
+"the meeting of" the conditions for the installation of the program recipe.
+
+=cut
+
+sub meet {
+    my $self = shift;
+    return 'Redefine me';
+}
+
 1;

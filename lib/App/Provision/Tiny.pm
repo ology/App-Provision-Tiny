@@ -51,7 +51,7 @@ sub new
     my %args = @_;
     my $self = {};
     bless $self, $class;
-    $self->_init(%args);
+    $self->_init(%args, class => $class);
     return $self;
 }
 
@@ -65,6 +65,11 @@ sub _init
 
     # Set defaults.
     $self->{system} ||= 'osx';
+    unless ($self->{program})
+    {
+        $self->{class} =~ s/App::Provision::(\w+)$/$1/;
+        $self->{program} = lc $self->{class};
+    }
 }
 
 =head2 condition()
@@ -78,7 +83,8 @@ is needed.
 sub condition
 {
     my $self = shift;
-    my $condition = which($self->{program});
+    my $callback = shift || sub { which($self->{program}) };
+    my $condition = $callback->();
     warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
     return $condition ? 1 : 0;
 }

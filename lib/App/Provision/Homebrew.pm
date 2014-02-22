@@ -12,7 +12,8 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub homebrew {
+sub homebrew
+{
     my $self = shift;
     $self->recipe(
       [ 'ruby', '-e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"' ],

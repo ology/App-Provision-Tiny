@@ -3,7 +3,8 @@ use strict;
 use warnings;
 use parent qw( App::Provision );
 
-sub perlbrew {
+sub perlbrew
+{
     my $self = shift;
     $self->recipe(
       [ 'curl -L http://install.perlbrew.pl | bash' ],

@@ -16,7 +16,8 @@ sub condition
     return $condition;
 }
 
-sub cpanupdate {
+sub cpanupdate
+{
     my $self = shift;
     $self->recipe(
       [

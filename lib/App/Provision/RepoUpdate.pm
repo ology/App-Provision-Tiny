@@ -13,7 +13,8 @@ sub condition
     return $condition;
 }
 
-sub repoupdate {
+sub repoupdate
+{
     my $self = shift;
     $self->recipe(
       [

@@ -1,7 +1,7 @@
 package App::Provision::RepoUpdate;
 use strict;
 use warnings;
-use parent qw( App::Provision );
+use parent qw( App::Provision::Tiny );
 
 sub condition
 {

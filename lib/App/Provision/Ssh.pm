@@ -1,7 +1,7 @@
 package App::Provision::Ssh;
 use strict;
 use warnings;
-use parent qw( App::Provision );
+use parent qw( App::Provision::Tiny );
 
 sub condition
 {

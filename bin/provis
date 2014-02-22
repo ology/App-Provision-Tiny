@@ -2,19 +2,18 @@
 use strict;
 use warnings;
 
-use File::Which;
 use Getopt::Simple qw($switch);
+use Module::Runtime qw(use_module);
+
+my $usage = "Usage: perl $0 program [--options]";
+
+my $program = shift || die "$usage\n";
 
 my $options = {
     help => {
         type    => '',
         env     => '-',
         default => '',
-    },
-    program => {
-        type    => '=s',
-        default => '',
-        verbose => '* Required. The program to install',
     },
     keytype => {
         type    => '=s',
@@ -37,58 +36,11 @@ my $options = {
         verbose => 'The name in chameleon5/domains/name',
     },
 };
-my $usage = "Usage: perl $0 --program=foo [--options]";
 my $option = Getopt::Simple->new;
-if (! $option->getOptions($options, $usage) ) {
-    exit -1; # Failure.
-}
-#use Data::Dumper;die
-#Data::Dumper->new([$switch])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
+exit -1 unless $option->getOptions($options, $usage);
+#use Data::Dumper;die Data::Dumper->new([$switch])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
-# Conditional errors.
-die "$usage\n" unless $switch->{program};
-die "Program 'chameleon' must include repo\n"
-    if $switch->{program} eq 'chameleon' && !$switch->{repo};
-die "Program 'foundation' must include site\n"
-    if $switch->{program} eq 'foundation' && !$switch->{site};
-
-my $repo = $switch->{repo};
-my $site = "$repo/chameleon5/domains/$switch->{site}/site_root";
-
-my $provision = {
-  chameleon5 => {
-    condition => sub { -d "$repo/chameleon5" },
-    commands  => [
-      [ qw( git clone git@github.com:Whapps/chameleon5.git ), "$repo/chameleon5" ],
-      [ 'cp', "$repo/chameleon5/bin/sample_dev_c5.pl", "$repo/chameleon5/bin/c5.pl" ],
-      [ 'cpanm', "$repo/chameleon5/modules/Chameleon5" ],
-      [ 'cpanm', "$repo/chameleon5/modules/Chameleon5-Contrib" ],
-    ],
-  },
-  foundation => {
-    condition => sub { -e "$site/js/foundation.min.js" },
-    commands  => [
-      [ 'wget', 'http://foundation.zurb.com/cdn/releases/foundation-5.1.1.zip', '-P', "$ENV{HOME}/Downloads/" ],
-      [ 'unzip', "$ENV{HOME}/Downloads/foundation-5.1.1.zip", '-d', "$ENV{HOME}/Downloads/foundation/" ],
-      # TODO Make these a single * glob:
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/index.html", "$repo/chameleon5/domains/$site/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/css", "$repo/chameleon5/domains/$site/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/img", "$repo/chameleon5/domains/$site/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/js", "$repo/chameleon5/domains/$site/site_root/" ],
-    ],
-  },
-};
-
-# Is the program condition met?
-my $condition = $provision->{$switch->{program}}{condition}->() ? 1 : 0;
-print "'$switch->{program}' ", ($condition ? 'is' : 'not'), " installed\n";
-# If not, run handle the program!
-unless ($condition)
-{
-    for my $cmd ( @{ $provision->{$switch->{program}}{commands} } )
-    {
-        #warn "CMD: @$cmd\n";
-        system(@$cmd) == 0 or warn "system @$cmd failed: $?";
-    }
-}
+$program = lc $program;
+my $app = use_module('App::Provision::' . ucfirst($program))->new;
+$app->$program();
 

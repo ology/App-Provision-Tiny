@@ -47,65 +47,15 @@ if (! $option->getOptions($options, $usage) ) {
 
 # Conditional errors.
 die "$usage\n" unless $switch->{program};
-die "Program 'ssh' must include keytype and keyname\n"
-    if $switch->{program} eq 'ssh' && !($switch->{keytype} && $switch->{keyname});
 die "Program 'chameleon' must include repo\n"
     if $switch->{program} eq 'chameleon' && !$switch->{repo};
-die "Program 'update' must include repo\n"
-    if $switch->{program} eq 'update' && !$switch->{repo};
 die "Program 'foundation' must include site\n"
     if $switch->{program} eq 'foundation' && !$switch->{site};
 
-my $keyfile = sprintf '%s/.ssh/id_%s-%s', $ENV{HOME}, $switch->{keytype}, $switch->{keyname};
 my $repo = $switch->{repo};
 my $site = "$repo/chameleon5/domains/$switch->{site}/site_root";
 
 my $provision = {
-  sequelpro => {
-    condition => sub { -d '/Applications/Sequel Pro.app' },
-    commands  => [
-      [ 'wget', 'https://sequel-pro.googlecode.com/files/sequel-pro-1.0.2.dmg', '-P', "$ENV{HOME}/Downloads/" ],
-      [ 'hdiutil', 'attach', "$ENV{HOME}/Downloads/sequel-pro-1.0.2.dmg", ],
-      [ 'cp', '-r', '/Volumes/Sequel Pro 1.0.2/Sequel Pro.app', '/Applications/' ],
-      [ 'hdiutil', 'detach', '/Volumes/Sequel Pro 1.0.2' ],
-    ],
-  },
-  ssh => {
-    condition => sub { -e $keyfile },
-    commands  => [
-      [ 'ssh-keygen', '-t', $switch->{keytype}, '-f', $keyfile ],
-      [ "cat $keyfile.pub | tr -d '\n' | pbcopy" ],
-      [ 'echo', '* Now paste your public key into https://github.com/settings/ssh *' ],
-    ],
-  },
-  homebrew => {
-    condition => sub { which('brew') },
-    commands  => [
-      [ 'ruby', '-e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"' ],
-      [ 'brew', 'doctor' ],
-    ],
-  },
-  git => {
-    condition => sub { which('git') },
-    commands  => [
-      [qw( brew install git )],
-    ],
-  },
-  mysql => {
-    condition => sub { which('mysql') },
-    commands  => [
-      [qw( brew install mysql )],
-    ],
-  },
-  perlbrew => {
-    condition => sub { which('perlbrew') },
-    commands  => [
-      [ 'curl -L http://install.perlbrew.pl | bash' ],
-      [ "echo 'source ~/perl5/perlbrew/etc/bashrc >> $ENV{HOME}/.bash_profile" ],
-      [qw( perlbrew install perl-5.18.2 )],
-      [qw( perlbrew switch perl-5.18.2 )],
-    ],
-  },
   chameleon5 => {
     condition => sub { -d "$repo/chameleon5" },
     commands  => [
@@ -113,19 +63,6 @@ my $provision = {
       [ 'cp', "$repo/chameleon5/bin/sample_dev_c5.pl", "$repo/chameleon5/bin/c5.pl" ],
       [ 'cpanm', "$repo/chameleon5/modules/Chameleon5" ],
       [ 'cpanm', "$repo/chameleon5/modules/Chameleon5-Contrib" ],
-    ],
-  },
-  update => {
-    condition => sub { 0 },
-    commands  => [
-      # git pull in each sub-repo
-      [
-"find $repo -type d -name .git | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && git pull; done"
-      ],
-      # CPAN install in the repos
-      [
-"find $repo -type d -name lib | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && cpanm .; done"
-      ],
     ],
   },
   foundation => {

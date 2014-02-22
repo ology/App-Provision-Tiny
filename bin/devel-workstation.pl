@@ -46,7 +46,7 @@ if (! $option->getOptions($options, $usage) ) {
 #Data::Dumper->new([$switch])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 # Conditional errors.
-die $usage unless $switch->{program};
+die "$usage\n" unless $switch->{program};
 die "Program 'ssh' must include keytype and keyname\n"
     if $switch->{program} eq 'ssh' && !($switch->{keytype} && $switch->{keyname});
 die "Program 'chameleon' must include repo\n"

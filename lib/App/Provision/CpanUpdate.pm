@@ -7,8 +7,10 @@ sub condition
 {
     my $self = shift;
 
-    die "Program 'cpanupdate' must include a --repo\n"
-        if $self->{program} eq 'cpanupdate' && !$self->{repo};
+    $self->{program} = 'cpanupdate';
+
+    die "Program '$self->{program}' must include a --repo\n"
+        unless $self->{repo};
 
     my $condition = 0;
     warn "Always update!\n";
@@ -21,8 +23,8 @@ sub cpanupdate
     my $self = shift;
     $self->recipe(
       [
+"find $self->{repo} -type d -name lib | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && cpanm .; done"
       ],
-"find $repo -type d -name lib | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && cpanm .; done"
     );
 }
 

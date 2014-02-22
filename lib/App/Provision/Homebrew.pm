@@ -6,9 +6,13 @@ use parent qw( App::Provision::Tiny );
 sub condition
 {
     my $self = shift;
+
+    # Reset the program name.
     $self->{program} = 'brew';
+
     my $condition = -e $self->{program};
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
+
     return $condition ? 1 : 0;
 }
 

@@ -6,9 +6,13 @@ use parent qw( App::Provision::Tiny );
 sub condition
 {
     my $self = shift;
+
+    # The program name is a special case for OSX.apps.
     $self->{program} = '/Applications/Sequel Pro.app';
+
     my $condition = -d $self->{program};
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
+
     return $condition ? 1 : 0;
 }
 

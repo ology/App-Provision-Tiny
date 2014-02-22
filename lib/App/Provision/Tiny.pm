@@ -85,7 +85,7 @@ sub condition
     my $self = shift;
     my $callback = shift || sub { which($self->{program}) };
     my $condition = $callback->();
-    warn $self->{program}, ($condition ? 'is' : "isn't"), " installed\n";
+    warn "$self->{program} ", ($condition ? 'is' : "isn't"), " installed\n";
     return $condition ? 1 : 0;
 }
 
@@ -119,18 +119,6 @@ sub system_install
         #warn "CMD: @$cmd\n";
         system(@$cmd) == 0 or warn "system @$cmd failed: $?";
     }
-}
-
-=head2 meet()
-
-This is a subroutine to redefine in your class for the actual execution, that is
-"the meeting of" the conditions for the installation of the program recipe.
-
-=cut
-
-sub meet {
-    my $self = shift;
-    return 'Redefine me';
 }
 
 1;

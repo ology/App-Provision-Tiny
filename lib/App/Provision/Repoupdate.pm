@@ -10,10 +10,7 @@ sub condition
     die "Program '$self->{program}' must include a --repo\n"
         unless $self->{repo};
 
-    my $condition = 0;
-    warn "Always update!\n";
-
-    return $condition;
+    return 0; # Always update
 }
 
 sub repoupdate

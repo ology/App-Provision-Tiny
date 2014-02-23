@@ -26,9 +26,9 @@ App::Provision::Tiny - Provision computers
 =head1 DESCRIPTION
 
 An C<App::Provision::Tiny> together with a sub-classed recipe module (like
-C<Foo>), contain the methods to provison a workstation or server.
+C<Foo>), contain the methods to provision a workstation or server.
 
-* Currently, the included recipes are for OS X only.
+* Currently, the included recipes are for OS X machines.
 
 =cut
 
@@ -95,7 +95,7 @@ sub condition
 
 This is the actual set of steps to take to check for and install a program, and
 is to be redefined in your subclass.  If not obvious, they can be "simple"
-system commands, complex perl or a combination therof.
+system commands, complex perl or a combination thereof.
 
 =cut
 

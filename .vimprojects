@@ -1,14 +1,14 @@
 App-Provision-Tiny=~/sandbox/github/ology/App-Provision-Tiny CD=. {
  lib=lib/App/Provision {
   Chameleon5.pm
-  CpanUpdate.pm
+  Cpanupdate.pm
   Foundation.pm
   Git.pm
   Homebrew.pm
   Mysql.pm
   Perlbrew.pm
-  RepoUpdate.pm
-  SequelPro.pm
+  Repoupdate.pm
+  Sequelpro.pm
   Ssh.pm
   Tiny.pm
  }

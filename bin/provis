@@ -38,9 +38,8 @@ my $options = {
 };
 my $option = Getopt::Simple->new;
 exit -1 unless $option->getOptions($options, $usage);
-#use Data::Dumper;die Data::Dumper->new([$switch])->Indent(1)->Terse(1)->Quotekeys(0)->Sortkeys(1)->Dump;
 
 $program = lc $program;
-my $app = use_module('App::Provision::' . ucfirst($program))->new;
+my $app = use_module('App::Provision::' . ucfirst($program))->new(%$switch);
 $app->$program();
 

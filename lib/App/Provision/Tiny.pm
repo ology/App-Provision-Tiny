@@ -28,6 +28,8 @@ App::Provision::Tiny - Provision computers
 An C<App::Provision::Tiny> together with a sub-classed recipe module (like
 C<Foo>), contain the methods to provison a workstation or server.
 
+* Currently, the included recipes are for OS X only.
+
 =cut
 
 =head1 METHODS

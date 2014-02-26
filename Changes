@@ -1,6 +1,7 @@
 Revision history for App-Provision-Tiny
 
 {{$NEXT}}
+    - Added multi system recipe definition (currently osx and apt).
 
 0.01  2014-02-23
     - Imported functionality from devel repo.

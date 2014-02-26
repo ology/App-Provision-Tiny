@@ -6,9 +6,18 @@ use parent qw( App::Provision::Tiny );
 sub git
 {
     my $self = shift;
-    $self->recipe(
-      [qw( brew install git )],
-    );
+    if ($self->{system} eq 'osx' )
+    {
+        $self->recipe(
+          [qw( brew install git )],
+        );
+    }
+    elsif ($self->{system} eq 'apt' )
+    {
+        $self->recipe(
+          [qw( sudo apt-get install git )],
+        );
+    }
 }
 
 1;

@@ -97,8 +97,8 @@ sub condition
 =head2 recipe()
 
 This is the actual set of steps to take to check for and install a program, and
-is to be redefined in your subclass.  If not obvious, they can be "simple"
-system commands, complex perl or a combination thereof.
+should be redefined in your subclass.  If not obvious, they can be "simple"
+system commands (as is the default) or complex perl.
 
 =cut
 
@@ -111,7 +111,7 @@ sub recipe
 
 =head2 system_install()
 
-Use the C<system()> function to install, inside your subclass method.
+Use the C<system()> function to install.
 
 =cut
 

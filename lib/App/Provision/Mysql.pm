@@ -3,12 +3,14 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
-sub mysql
+sub meet
 {
     my $self = shift;
     if ( $self->{system} eq 'osx' )
+    {
         $self->recipe(
           [qw( brew install mysql )],
+          [ 'unset TMPDIR && mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp' ],
         );
     }
     elsif ( $self->{system} eq 'apt' )

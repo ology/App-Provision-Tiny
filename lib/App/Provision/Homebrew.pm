@@ -19,7 +19,7 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub homebrew
+sub meet
 {
     my $self = shift;
     $self->recipe(

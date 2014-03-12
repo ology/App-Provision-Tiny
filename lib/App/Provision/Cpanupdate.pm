@@ -13,7 +13,7 @@ sub condition
     return 0; # Always update.
 }
 
-sub cpanupdate
+sub meet
 {
     my $self = shift;
     $self->recipe(

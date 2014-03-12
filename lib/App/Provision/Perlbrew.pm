@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
-sub perlbrew
+sub meet
 {
     my $self = shift;
     $self->recipe(

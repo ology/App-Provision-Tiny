@@ -13,7 +13,7 @@ sub condition
     return 0; # Always update
 }
 
-sub repoupdate
+sub meet
 {
     my $self = shift;
     $self->recipe(

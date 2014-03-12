@@ -16,7 +16,7 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub foundation
+sub meet
 {
     my $self = shift;
     $self->recipe(

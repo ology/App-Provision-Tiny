@@ -16,7 +16,7 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub sequelpro
+sub meet
 {
     my $self = shift;
     if ( $self->{system} eq 'osx' )

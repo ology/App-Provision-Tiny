@@ -20,7 +20,7 @@ sub condition
     return $condition ? 1 : 0;
 }
 
-sub ssh
+sub meet
 {
     my $self = shift;
     $self->recipe(

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
-sub git
+sub meet
 {
     my $self = shift;
     if ($self->{system} eq 'osx' )

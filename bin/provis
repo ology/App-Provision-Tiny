@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use lib '/Users/gene/sandbox/github/ology/App-Provision-Tiny/lib';
 use Getopt::Simple qw($switch);
 use Module::Runtime qw(use_module);
 
@@ -42,5 +43,5 @@ exit -1 unless $option->getOptions($options, $usage);
 
 $program = lc $program;
 my $app = use_module('App::Provision::' . ucfirst($program))->new(%$switch);
-$app->$program();
+$app->meet();
 

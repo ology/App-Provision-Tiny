@@ -18,10 +18,11 @@ App::Provision::Tiny - Provision computers
   # With the module:
   use App::Provision::Foo;
   $app = App::Provision::Foo->new;
-  $app->foo;
+  $app->meet;
 
   # On the command line:
-  > provis foo
+  > provis homebrew
+  > provis cpanmupgrade --repo ~/sandbox
 
 =head1 DESCRIPTION
 
@@ -65,8 +66,10 @@ sub _init
     # Turn arguments into object attributes.
     $self->{$_} = $args{$_} || undef for keys %args;
 
-    # Set defaults.
+    # Set the system to provision.
     $self->{system} ||= 'osx';
+
+    # Set the program to provision on the system.
     unless ($self->{program})
     {
         $self->{class} =~ s/App::Provision::(\w+)$/$1/;

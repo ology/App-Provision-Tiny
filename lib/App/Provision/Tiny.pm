@@ -79,8 +79,8 @@ sub _init
 
 =head2 condition()
 
-This is the condition to check for the presence of a program, and is to
-redefined in your subclass, if anything beyond effectively C<`which program`>
+This is the condition to check for the presence of a program, and should be
+redefined in your subclass, if anything beyond a simple C<`which program`>
 is needed.
 
 =cut
@@ -97,9 +97,9 @@ sub condition
 =head2 recipe()
 
 This is the actual set of steps to take to check for and install a program, and
-should be defined in your subclass in the C<meet()> method.  If not obvious,
-the steps can be "simple" system commands (as is the default) or complex perl.
+should be used, or redefined, in your subclass, in the C<meet()> method.
 
+The steps can be simple system (i.e. "shell") commands or complex perl.
 By default, this base recipe uses the C<system_install()> method.
 
 =cut

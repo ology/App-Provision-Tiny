@@ -18,7 +18,7 @@ sub meet
     my $self = shift;
     $self->recipe(
       [
-"find $self->{repo} -type d -name lib | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && cpanm .; done"
+"find $self->{repo} -type d -name lib | xargs -n 1 dirname | sort | while read line; do echo \$line && cd \$line && cpan .; done"
       ],
     );
 }

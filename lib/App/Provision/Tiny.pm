@@ -77,21 +77,6 @@ sub _init
     }
 }
 
-=head1 depends()
-
- $self->depends;
-
-Declare the dependent recipes.  This method must be redefined in your recipe
-module, if any are required.
-
-=cut
-
-sub depends
-{
-    my $self = shift;
-    return qw();
-}
-
 =head2 condition()
 
 This is the condition to check for the presence of a program, and should be

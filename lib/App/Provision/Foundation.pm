@@ -7,8 +7,8 @@ sub condition
 {
     my $self = shift;
 
-    die "Program '$self->{program}' must include a --repo and --site\n"
-        unless $self->{repo} && $self->{site};
+    die "Program '$self->{program}' must include a --site\n"
+        unless $self->{site};
 
     my $condition = -e "$self->{site}/js/foundation.min.js";
     warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
@@ -23,10 +23,10 @@ sub meet
       [ 'wget', 'http://foundation.zurb.com/cdn/releases/foundation-5.1.1.zip', '-P', "$ENV{HOME}/Downloads/" ],
       [ 'unzip', "$ENV{HOME}/Downloads/foundation-5.1.1.zip", '-d', "$ENV{HOME}/Downloads/foundation/" ],
       # TODO Make these a single * glob:
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/index.html", "$self->{repo}/chameleon5/domains/$self->{site}/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/css", "$self->{repo}/chameleon5/domains/$self->{site}/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/img", "$self->{repo}/chameleon5/domains/$self->{site}/site_root/" ],
-      [ 'mv', "$ENV{HOME}/Downloads/foundation/js", "$self->{repo}/chameleon5/domains/$self->{site}/site_root/" ],
+      [ 'mv', "$ENV{HOME}/Downloads/foundation/index.html", $self->{site} ],
+      [ 'mv', "$ENV{HOME}/Downloads/foundation/css", $self->{site} ],
+      [ 'mv', "$ENV{HOME}/Downloads/foundation/img", $self->{site} ],
+      [ 'mv', "$ENV{HOME}/Downloads/foundation/js", $self->{site} ],
     );
 }
 

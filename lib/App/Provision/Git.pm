@@ -3,6 +3,10 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+sub depends {
+    return qw( homebrew );
+}
+
 sub meet
 {
     my $self = shift;

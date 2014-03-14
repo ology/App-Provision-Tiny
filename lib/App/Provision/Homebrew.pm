@@ -4,6 +4,11 @@ use warnings;
 use parent qw( App::Provision::Tiny );
 use File::Which;
 
+sub deps
+{
+    return qw( ruby curl homebrew );
+}
+
 sub condition
 {
     my $self = shift;

@@ -3,7 +3,8 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
-sub depends {
+sub deps
+{
     return qw( homebrew );
 }
 

@@ -3,6 +3,11 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+sub deps
+{
+    return qw( curl );
+}
+
 sub meet
 {
     my $self = shift;

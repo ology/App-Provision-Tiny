@@ -1,6 +1,7 @@
 Revision history for App-Provision-Tiny
 
 {{$NEXT}}
+    - Used meet() instead of whatever_the_plugin_is_named().
     - Allowed --force.
     - Vastly improved existing plugin logic.
     - Added plugins for Cpanm, Sourcetree & Wget.

@@ -108,7 +108,7 @@ sub recipe
 {
     my $self = shift;
     my @steps = @_;
-    $self->system_install(@steps) unless $self->condition;
+    $self->system_install(@steps) if $self->{force} || !$self->condition;
 }
 
 =head2 system_install()

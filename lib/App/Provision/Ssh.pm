@@ -10,11 +10,8 @@ sub condition
     die "Program '$self->{program}' must include --keytype and --keyname\n"
         unless $self->{keytype} && $self->{keyname};
 
-    # Set the keyfile attribute.
-    $self->{keyfile} = sprintf '%s/.ssh/id_%s-%s', $ENV{HOME},
-        $self->{keytype}, $self->{keyname};
-
-    my $condition = -e $self->{keyfile};
+    my $file = $self->_keyfile();
+    my $condition = -e $file;
     warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
 
     return $condition ? 1 : 0;
@@ -23,11 +20,24 @@ sub condition
 sub meet
 {
     my $self = shift;
+
+    my $file = $self->_keyfile();
+
     $self->recipe(
-      [ 'ssh-keygen', '-t', $self->{keytype}, '-f', $self->{keyfile} ],
-      [ "cat $self->{keyfile}.pub | tr -d '\n' | pbcopy" ],
+      [ 'mkdir', '.ssh' ],
+      [ 'chmod', '700', '.ssh' ],
+      [ 'ssh-keygen', '-t', $self->{keytype}, '-f', $file ],
+      [ "cat $file.pub | tr -d '\n' | pbcopy" ],
       [ 'echo', '* Now paste your public key into https://github.com/settings/ssh *' ],
     );
+}
+
+sub _keyfile
+{
+    # Set the keyfile attribute.
+    my $self = shift;
+    return sprintf '%s/.ssh/id_%s-%s', $ENV{HOME},
+        $self->{keytype}, $self->{keyname};
 }
 
 1;

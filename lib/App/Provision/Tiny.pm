@@ -17,12 +17,12 @@ App::Provision::Tiny - Provision computers
 
   # With the module:
   use App::Provision::Foo;
-  $app = App::Provision::Foo->new;
-  $app->meet;
+  $foo = App::Provision::Foo->new;
+  $foo->meet;
 
-  # On the command line:
-  > provis homebrew
-  > provis cpanmupgrade --repo ~/sandbox
+  # Command line examples:
+  > provis wget
+  > provis ssh --keytype dsa --keyname github
 
 =head1 DESCRIPTION
 

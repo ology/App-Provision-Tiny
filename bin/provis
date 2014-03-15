@@ -17,6 +17,10 @@ my $options = {
         env     => '-',
         default => '',
     },
+    force => {
+        type    => '',
+        default => 0,
+    },
     keytype => {
         type    => '=s',
         default => 'rsa',

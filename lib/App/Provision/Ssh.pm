@@ -27,7 +27,7 @@ sub meet
       [ 'mkdir', '.ssh' ],
       [ 'chmod', '700', '.ssh' ],
       [ 'ssh-keygen', '-t', $self->{keytype}, '-f', $file ],
-      [ "cat $file.pub | tr -d '\n' | pbcopy" ],
+      [ "cat $ENV{HOME}/.ssh/$file.pub | tr -d '\n' | pbcopy" ],
       [ 'echo', '* Now paste your public key into https://github.com/settings/ssh *' ],
     );
 }

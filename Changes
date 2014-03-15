@@ -1,7 +1,10 @@
 Revision history for App-Provision-Tiny
 
 {{$NEXT}}
-    - 
+    - Allowed --force.
+    - Vastly improved existing plugin logic.
+    - Added plugins for Cpanm, Sourcetree & Wget.
+    - Added the beginnings of dependency meeting.
 
 0.03  2014-03-12
     - Replaced App::Provision::Foo::foo() with the meet() method.

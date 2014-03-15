@@ -39,7 +39,7 @@ my $options = {
     site => {
         type    => '=s',
         default => 'localhost',
-        verbose => 'The name in chameleon5/domains/name',
+        verbose => 'Webserver root []',
     },
 };
 my $option = Getopt::Simple->new;

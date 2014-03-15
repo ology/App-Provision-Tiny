@@ -6,7 +6,7 @@ use File::Which;
 
 sub deps
 {
-    return qw( ruby curl homebrew );
+    return qw( ruby curl );
 }
 
 sub condition

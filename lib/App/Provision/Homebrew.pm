@@ -28,7 +28,7 @@ sub meet
 {
     my $self = shift;
     $self->recipe(
-      [ 'ruby', '-e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"' ],
+      [ 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"' ],
       [ 'brew', 'doctor' ],
     );
 }

@@ -1,7 +1,7 @@
 Revision history for App-Provision-Tiny
 
 {{$NEXT}}
-    - 
+    - Enabled --release specification/requirement.
 
 0.04  2014-03-15
     - Used meet() instead of whatever_the_plugin_is_named().

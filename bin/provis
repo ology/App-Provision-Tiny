@@ -41,6 +41,10 @@ my $options = {
         default => 'localhost',
         verbose => 'Webserver root []',
     },
+    release => {
+        type    => '=s',
+        verbose => 'The latest version number of the program',
+    },
 };
 my $option = Getopt::Simple->new;
 exit -1 unless $option->getOptions($options, $usage);

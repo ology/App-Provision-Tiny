@@ -11,13 +11,16 @@ sub deps
 sub meet
 {
     my $self = shift;
+
+    $self->{release} ||= '5.18.2';
+
     $self->recipe(
       [ 'curl -L http://install.perlbrew.pl | bash' ],
       [ 'touch', "$ENV{HOME}/.bash_profile" ],
       [ "echo 'source ~/perl5/perlbrew/etc/bashrc' >> $ENV{HOME}/.bash_profile" ],
       [ "`source', $ENV{HOME}/.bash_profile`" ],
-      [qw( perlbrew install perl-5.18.2 )],
-      [qw( perlbrew switch perl-5.18.2 )],
+      [qw( perlbrew install ), "perl-$self->{release}" ],
+      [qw( perlbrew switch ), "perl-$self->{release}" ],
     );
 }
 

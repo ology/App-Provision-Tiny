@@ -7,8 +7,8 @@ sub condition
 {
     my $self = shift;
 
-    die "Program '$self->{program}' must include a --site\n"
-        unless $self->{site};
+    die "Program '$self->{program}' must include a --site and --release\n"
+        unless $self->{site} && $self->{release};
 
     my $condition = -e "$self->{site}/js/foundation.min.js";
     warn $self->{program}, ' is', ($condition ? '' : "n't"), " installed\n";
@@ -20,8 +20,8 @@ sub meet
 {
     my $self = shift;
     $self->recipe(
-      [ 'wget', 'http://foundation.zurb.com/cdn/releases/foundation-5.1.1.zip', '-P', "$ENV{HOME}/Downloads/" ],
-      [ 'unzip', "$ENV{HOME}/Downloads/foundation-5.1.1.zip", '-d', "$ENV{HOME}/Downloads/foundation/" ],
+      [ 'wget', "http://foundation.zurb.com/cdn/releases/foundation-$self->{release}.zip", '-P', "$ENV{HOME}/Downloads/" ],
+      [ 'unzip', "$ENV{HOME}/Downloads/foundation-$self->{release}.zip", '-d', "$ENV{HOME}/Downloads/foundation/" ],
       # TODO Make these a single * glob:
       [ 'mv', "$ENV{HOME}/Downloads/foundation/index.html", $self->{site} ],
       [ 'mv', "$ENV{HOME}/Downloads/foundation/css", $self->{site} ],

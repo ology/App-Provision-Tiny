@@ -12,6 +12,9 @@ sub condition
 {
     my $self = shift;
 
+    die "Program '$self->{program}' must include a --release\n"
+        unless $self->{release};
+
     # The program name is a special case for OSX.apps.
     $self->{program} = '/Applications/SourceTree.app';
 
@@ -27,8 +30,8 @@ sub meet
     if ( $self->{system} eq 'osx' )
     {
         $self->recipe(
-          [ 'wget', 'http://downloads.atlassian.com/software/sourcetree/SourceTree_1.8.1.dmg', '-P', "$ENV{HOME}/Downloads/" ],
-          [ 'hdiutil', 'attach', "$ENV{HOME}/Downloads/SourceTree_1.8.1.dmg", ],
+          [ 'wget', "http://downloads.atlassian.com/software/sourcetree/SourceTree_$self->{release}.dmg", '-P', "$ENV{HOME}/Downloads/" ],
+          [ 'hdiutil', 'attach', "$ENV{HOME}/Downloads/SourceTree_$self->{release}.dmg", ],
           [ 'cp', '-r', '/Volumes/SourceTree/SourceTree.app', '/Applications/' ],
           [ 'hdiutil', 'detach', '/Volumes/SourceTree' ],
         );

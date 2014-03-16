@@ -23,13 +23,14 @@ App::Provision::Tiny - Provision computers
   # Command line examples:
   > provis wget
   > provis ssh --keytype dsa --keyname github
+  > provis foundation --release x.y.z
 
 =head1 DESCRIPTION
 
 An C<App::Provision::Tiny> together with a sub-classed recipe module (like
 C<Foo>), contain the methods to provision a workstation or server.
 
-* Currently, the included recipes are for OS X machines.
+* Currently, the included recipes are for B<homebrew> or B<apt> based machines.
 
 =cut
 

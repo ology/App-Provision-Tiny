@@ -46,6 +46,11 @@ Argument: default
 
  program: undef
  system:  osx
+ release: undef
+ repo:    undef 
+ site:    undef
+ keytype: undef
+ keyname: undef
 
 =cut
 

@@ -44,8 +44,8 @@ Create a new C<App::Provision::Tiny> object.
 
 Argument: default
 
- program: undef
  system:  osx
+ program: undef
  release: undef
  repo:    undef 
  site:    undef

@@ -18,12 +18,13 @@ App::Provision::Tiny - Provision computers
   # With the module:
   use App::Provision::Foo;
   $foo = App::Provision::Foo->new;
+  print join(', ', $foo->deps), "\n"; # Just for info, currently
   $foo->meet;
 
   # Command line examples:
   > provis wget
   > provis ssh --keytype dsa --keyname github
-  > provis foundation --release x.y.z
+  > provis foundation --release x.y.z --site /the/www/site/root
 
 =head1 DESCRIPTION
 
@@ -47,7 +48,7 @@ Argument: default
  system:  osx
  program: undef
  release: undef
- repo:    undef 
+ repo:    undef
  site:    undef
  keytype: undef
  keyname: undef

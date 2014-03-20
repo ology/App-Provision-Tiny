@@ -3,6 +3,12 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+sub deps
+{
+    my $self = shift;
+    return qw( wget unzip );
+}
+
 sub condition
 {
     my $self = shift;

@@ -1,5 +1,0 @@
-#!/usr/bin/perl -w
-# Usage: Hello
-# Usage: -opish_prefix ub Hello
-use Acme::Opish;
-print enop("@ARGV"), "\n";

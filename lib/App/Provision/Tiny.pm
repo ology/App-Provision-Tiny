@@ -7,11 +7,7 @@ use warnings;
 
 use File::Which;
 
-our $VERSION = '0.0401';
-
-=head1 NAME
-
-App::Provision::Tiny - Provision computers
+our $VERSION = '0.0402';
 
 =head1 SYNOPSIS
 

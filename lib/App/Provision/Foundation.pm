@@ -3,11 +3,21 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+=head1 FUNCTIONS
+
+=head2 deps
+
+=cut
+
 sub deps
 {
     my $self = shift;
     return qw( wget unzip );
 }
+
+=head2 condition
+
+=cut
 
 sub condition
 {
@@ -21,6 +31,10 @@ sub condition
 
     return $condition ? 1 : 0;
 }
+
+=head2 meet
+
+=cut
 
 sub meet
 {

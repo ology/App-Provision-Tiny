@@ -3,10 +3,20 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+=head1 FUNCTIONS
+
+=head2 deps
+
+=cut
+
 sub deps
 {
     return qw( wget );
 }
+
+=head2 condition
+
+=cut
 
 sub condition
 {
@@ -23,6 +33,10 @@ sub condition
 
     return $condition ? 1 : 0;
 }
+
+=head2 meet
+
+=cut
 
 sub meet
 {

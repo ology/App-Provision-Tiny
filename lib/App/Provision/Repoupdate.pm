@@ -3,6 +3,12 @@ use strict;
 use warnings;
 use parent qw( App::Provision::Tiny );
 
+=head1 FUNCTIONS
+
+=head2 condition
+
+=cut
+
 sub condition
 {
     my $self = shift;
@@ -12,6 +18,10 @@ sub condition
 
     return 0; # Always update
 }
+
+=head2 meet
+
+=cut
 
 sub meet
 {

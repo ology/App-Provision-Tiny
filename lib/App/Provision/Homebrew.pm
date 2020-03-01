@@ -4,10 +4,20 @@ use warnings;
 use parent qw( App::Provision::Tiny );
 use File::Which;
 
+=head1 FUNCTIONS
+
+=head2 deps
+
+=cut
+
 sub deps
 {
     return qw( ruby curl );
 }
+
+=head2 condition
+
+=cut
 
 sub condition
 {
@@ -23,6 +33,10 @@ sub condition
 
     return $condition ? 1 : 0;
 }
+
+=head2 meet
+
+=cut
 
 sub meet
 {

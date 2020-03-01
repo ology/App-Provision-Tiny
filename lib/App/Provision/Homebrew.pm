@@ -27,10 +27,23 @@ sub condition
 sub meet
 {
     my $self = shift;
-    $self->recipe(
-      [ 'ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"' ],
-      [ 'brew', 'doctor' ],
-    );
+    if ($self->{system} eq 'osx' )
+    {
+        $self->recipe(
+            [ 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' ],
+            [ 'brew', 'doctor' ],
+        );
+    }
+    elsif ($self->{system} eq 'apt' )
+    {
+        $self->recipe(
+            [ 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"' ],
+            [ 'test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)' ],
+            [ 'test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' ],
+            [ 'test -r ~/.profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile' ],
+            [ 'echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile' ],
+        );
+    }
 }
 
 1;

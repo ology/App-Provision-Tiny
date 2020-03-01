@@ -7,7 +7,7 @@ use warnings;
 
 use File::Which;
 
-our $VERSION = '0.0402';
+our $VERSION = '0.0403';
 
 =head1 SYNOPSIS
 

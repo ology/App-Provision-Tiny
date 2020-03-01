@@ -1,6 +1,9 @@
 Revision history for App-Provision-Tiny
 
 {{$NEXT}}
+    - Update distribution.
+    - Remove undesired example module.
+    - Make the Homebrew module handle Debian.
 
 0.0402 2014-08-30
     - Fixed POD

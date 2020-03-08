@@ -39,7 +39,7 @@ my $options = {
     site => {
         type    => '=s',
         default => 'localhost',
-        verbose => 'Webserver root []',
+        verbose => 'Webserver root [localhost]',
     },
     release => {
         type    => '=s',

@@ -12,7 +12,7 @@ use File::Which;
 
 sub deps
 {
-    return qw( ruby curl );
+    return qw( curl );
 }
 
 =head2 condition
@@ -44,7 +44,7 @@ sub meet
     if ($self->{system} eq 'osx' )
     {
         $self->recipe(
-            [ 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"' ],
+            [ '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"' ],
             [ 'brew', 'doctor' ],
         );
     }

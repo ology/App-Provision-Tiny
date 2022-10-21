@@ -5,9 +5,9 @@ package App::Provision::Tiny;
 use strict;
 use warnings;
 
-use File::Which;
+use File::Which qw(which);
 
-our $VERSION = '0.0404';
+our $VERSION = '0.0405';
 
 =head1 SYNOPSIS
 

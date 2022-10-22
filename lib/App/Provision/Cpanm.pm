@@ -14,7 +14,7 @@ sub deps
     return qw( curl );
 }
 
-=head2 deps
+=head2 meet
 
 =cut
 
